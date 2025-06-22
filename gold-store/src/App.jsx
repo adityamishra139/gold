@@ -6,6 +6,8 @@ import Services from "./pages/Services"; // ✅ Ensure this file exists
 import Contact from "./pages/Contact";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import SignIn from "./pages/Signin";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<Contact />} />
         
       </Routes>
