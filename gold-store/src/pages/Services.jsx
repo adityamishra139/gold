@@ -1,40 +1,49 @@
+import {
+  FaGem,
+  FaExchangeAlt,
+  FaBalanceScale,
+  FaGift,
+  FaShieldAlt,
+  FaPiggyBank,
+} from "react-icons/fa"
+
 export default function Services() {
   const services = [
     {
       title: "Custom Jewelry Design",
       description:
         "Design your dream jewelry with our experts. From engagement rings to personal pendants, we bring your ideas to life.",
-      icon: "/icons/design.png",
+      icon: <FaGem className="text-amber-600 w-10 h-10" />,
     },
     {
       title: "Buyback & Exchange",
       description:
         "We offer fair buyback and exchange programs for your old gold items with instant valuation and hassle-free service.",
-      icon: "/icons/exchange.png",
+      icon: <FaExchangeAlt className="text-amber-600 w-10 h-10" />,
     },
     {
       title: "Purity Check",
       description:
         "Get your existing gold tested for purity using our advanced non-destructive technology with BIS standards.",
-      icon: "/icons/purity.png",
+      icon: <FaBalanceScale className="text-amber-600 w-10 h-10" />,
     },
     {
       title: "Gifting & Packaging",
       description:
         "Beautiful packaging for festive and wedding occasions. Choose from a variety of elegant wrapping options.",
-      icon: "/icons/gift.png",
+      icon: <FaGift className="text-amber-600 w-10 h-10" />,
     },
     {
       title: "Jewelry Insurance",
       description:
         "We offer optional insurance policies with every premium purchase to help you protect your most precious assets.",
-      icon: "/icons/shield.png",
+      icon: <FaShieldAlt className="text-amber-600 w-10 h-10" />,
     },
     {
       title: "Gold Saving Schemes",
       description:
         "Start saving with us and earn monthly bonuses. Redeem your savings for jewelry or cash at the end of your term.",
-      icon: "/icons/savings.png",
+      icon: <FaPiggyBank className="text-amber-600 w-10 h-10" />,
     },
   ]
 
@@ -49,11 +58,7 @@ export default function Services() {
             className="bg-white border border-gold-200 shadow-sm hover:shadow-xl rounded-xl p-6 transition-transform duration-300 hover:-translate-y-1"
           >
             <div className="flex items-center justify-center mb-4">
-              <img
-                src={service.icon}
-                alt={service.title}
-                className="w-14 h-14 object-contain"
-              />
+              {service.icon}
             </div>
             <h3 className="text-xl font-semibold text-amber-700 text-center mb-2">
               {service.title}
