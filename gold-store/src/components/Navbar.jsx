@@ -1,6 +1,10 @@
+<<<<<<< HEAD
+import { Link, NavLink } from "react-router-dom";
+=======
 import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import logo from "../assets/logo.jpg" 
+>>>>>>> 1ab42d3e105757b6914f6041c595460797a88c83
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -23,6 +27,11 @@ const Navbar = () => {
   return (
     <nav className="bg-gold-100 shadow-md p-4 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
+<<<<<<< HEAD
+        <Link to="/" className="text-2xl font-bold text-gold-700">
+          GoldStore
+        </Link>
+=======
         
         {/* Brand with Logo */}
         <Link to="/" className="flex items-center space-x-2">
@@ -35,12 +44,19 @@ const Navbar = () => {
         </Link>
 
         {/* Nav Links */}
+>>>>>>> 1ab42d3e105757b6914f6041c595460797a88c83
         <div className="space-x-6 text-gold-800 font-medium">
-          <NavLink to="/" className={({ isActive }) => isActive ? "underline" : ""}>Home</NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? "underline" : "")}
+          >
+            Home
+          </NavLink>
           <NavLink to="/products">Products</NavLink>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/services">Services</NavLink>
           <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/admin">Admin</NavLink>
         </div>
 
         {/* Auth Buttons */}
@@ -71,7 +87,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
