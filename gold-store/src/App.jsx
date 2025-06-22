@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SignIn from "./pages/Signin";
 import Signup from "./pages/Signup";
+import Profile from "./pages/Profile"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/profile" element={<Profile />} />
         
       </Routes>
       <Footer />
