@@ -8,7 +8,11 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SignIn from "./pages/Signin";
 import Signup from "./pages/Signup";
+<<<<<<< HEAD
 import Admin from "./pages/Admin";
+=======
+import Profile from "./pages/Profile"
+>>>>>>> 1ab42d3e105757b6914f6041c595460797a88c83
 
 function App() {
   return (
@@ -22,8 +26,13 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<Contact />} />
+<<<<<<< HEAD
                 <Route path="/admin" element={<Admin />} />
 
+=======
+        <Route path="/profile" element={<Profile />} />
+        
+>>>>>>> 1ab42d3e105757b6914f6041c595460797a88c83
       </Routes>
       <Footer />
     </div>
