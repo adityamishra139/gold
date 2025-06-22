@@ -1,7 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import logo from "../assets/logo.jpg" 
-import Profile from "../pages/Profile"
 
 const Navbar = () => {
   const navigate = useNavigate()

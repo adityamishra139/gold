@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { axiosInstance } from '../../axios';
 
 export default function Admin() {
   const [item, setItem] = useState({
@@ -41,7 +41,7 @@ export default function Admin() {
     formData.append("image", imageFile); // append image file
 
     try {
-      await axios.post("http://localhost:3000/gold/newItem", formData, {
+      await axiosInstance.post("/api/admin/newItem" , formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("Item added successfully!");
