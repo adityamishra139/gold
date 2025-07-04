@@ -15,9 +15,7 @@ const Navbar = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await axiosInstance.get("/api/user/me", {
-          withCredentials: true,
-        });
+        const res = await axiosInstance.get("/api/user/me");
 
         if (res.data.success) {
           const data = res.data.user;
