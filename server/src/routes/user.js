@@ -112,6 +112,20 @@ router.get("/me" , authenticate , async(req,res)=>{
     }
 })
 
+//get jewellery
+router.get('/jewel', async (req, res) => {
+  try {
+    const goldItem = await prisma.goldItem.findMany();
+    res.status(200).json({
+        success:true,
+        goldItem
+    }); // Send all gems
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error fetching gems' });
+  }
+});
+
 router.get("/logout",authenticate,async(req,res)=>{
  res.clearCookie('token', {
     httpOnly: true,
