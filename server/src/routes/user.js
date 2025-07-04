@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { userSchema } from "../helper/userSchema.js";
 import insertUser from "../helper/insertUser.js";
-import { verifyUser } from "../helper/verifyUser.js";
 import { generateToken } from "../helper/jwt.js";
-import { authenticate } from "../middlewares/authenticate.js";
 import { prisma } from "../helper/pooler.js";
+import { userSchema } from "../helper/userSchema.js";
+import { verifyUser } from "../helper/verifyUser.js";
+import { authenticate } from "../middlewares/authenticate.js";
 const router = Router();
 
 
@@ -27,7 +27,7 @@ router.post("/signup" , async(req,res)=>{
             res.cookie("token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production", 
-                sameSite:"Lax",
+                sameSite:"None",
                 maxAge:60 * 60 * 1000,
             });
             return res.json({success:false,"msg":"User already exists"})
@@ -66,7 +66,7 @@ router.post("/signin", async(req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             maxAge: 60 * 60 * 1000,
-            sameSite:"Lax"
+            sameSite:"None"
         });
 
         return res.status(200).json({
@@ -130,7 +130,7 @@ router.get("/logout",authenticate,async(req,res)=>{
  res.clearCookie('token', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'Lax',
+    sameSite: 'None',
   });
   return res.json({ success: true, message: 'Logged out successfully' });})
 
