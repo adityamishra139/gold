@@ -89,7 +89,8 @@ router.post("/signin", async(req, res) => {
 });
 router.get("/me" , authenticate , async(req,res)=>{
     try{
-        const userId = req.user.id;
+        const userId = req.user.userId;
+        console.log(req.user)
         const user = await prisma.user.findFirst({
             where:{
                 id:userId,
@@ -106,8 +107,17 @@ router.get("/me" , authenticate , async(req,res)=>{
     }
     catch(e)
     {
+        console.log(e)
         res.send("Error in authenticating");
     }
 })
+
+router.get("/logout",authenticate,async(req,res)=>{
+ res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'Lax',
+  });
+  return res.json({ success: true, message: 'Logged out successfully' });})
 
 export default router

@@ -10,7 +10,7 @@ const Navbar = () => {
   const user = useRecoilValue(userState);
   const setUser = useSetRecoilState(userState);
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(!!user?.id); 
+  const [isLoggedIn, setIsLoggedIn] = useState(user.id === null ? false:true); 
 
   useEffect(() => {
     const getUser = async () => {
@@ -42,15 +42,30 @@ const Navbar = () => {
         });
         localStorage.removeItem("recoil-persist");
         setIsLoggedIn(false);
-        // navigate("/signin");
       }
     };
 
     getUser();
   }, [setUser, navigate]);
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     // Optionally call your /logout API if needed
+
+    try{
+      const res = await axiosInstance.get('/api/user/logout');
+      if(!res.data.success)
+      {
+        alert("Error in logging out!!");
+      }
+      else{
+        alert("Logged out successfully!!")
+      }
+    }
+    catch(e)
+    {
+      console.log(e);
+    }
+
     setUser({
       id: null,
       fname: "",
