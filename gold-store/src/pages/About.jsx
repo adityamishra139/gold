@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <div className="bg-gradient-to-b from-white to-amber-50 min-h-screen px-6 md:px-20 py-12 text-amber-900">
-      <h1 className="text-4xl font-bold text-center mb-10">About Golden Store</h1>
+      <h1 className="text-4xl font-bold text-center mb-10">About Swarnaavya</h1>
 
       {/* Brand Story */}
       <section className="mb-16">

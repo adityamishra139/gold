@@ -4,56 +4,7 @@ import { Link } from "react-router-dom";
 import { axiosInstance } from "../../axios";
 import { useEffect } from "react";
 
-// const allProducts = [
-//   {
-//     id: 1,
-//     name: "Classic Gold Ring",
-//     category: "rings",
-//     price: 1299,
-//     rating: 4.8,
-//     image: "/images/ring.jpg",
-//   },
-//   {
-//     id: 2,
-//     name: "Elegant Necklace",
-//     category: "necklaces",
-//     price: 2499,
-//     rating: 4.9,
-//     image: "/images/necklace.jpg",
-//   },
-//   {
-//     id: 3,
-//     name: "Solid Gold Bracelet",
-//     category: "bracelets",
-//     price: 1899,
-//     rating: 4.7,
-//     image: "/images/bracelet.jpg",
-//   },
-//   {
-//     id: 4,
-//     name: "Classic Hoop Earrings",
-//     category: "earrings",
-//     price: 999,
-//     rating: 4.6,
-//     image: "/images/earring.jpg",
-//   },
-//   {
-//     id: 5,
-//     name: "Heavy Gold Chain",
-//     category: "chains",
-//     price: 2799,
-//     rating: 4.9,
-//     image: "/images/chain.jpg",
-//   },
-//   {
-//     id: 6,
-//     name: "Heart Pendant",
-//     category: "pendants",
-//     price: 799,
-//     rating: 4.5,
-//     image: "/images/pendant.jpg",
-//   },
-// ]
+
 
 const categories = [
   "all",
@@ -136,7 +87,7 @@ export default function Products() {
             className="border border-gold-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"
           >
             <img
-              src={`http://localhost:3000/uploads/${product.image}`}
+              src={`https://gold-1yxg.onrender.com/uploads/${product.image}`}
               alt={product.name}
               className="w-full h-64 object-cover bg-gold-50"
             />
