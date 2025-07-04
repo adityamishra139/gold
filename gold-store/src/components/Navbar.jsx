@@ -1,10 +1,6 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import logo from "../assets/logo.jpg";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { userState } from "../../atoms";
-import { axiosInstance } from "../../axios";
-import axios from "axios";
+import { Link, NavLink, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import logo from "../assets/logo.jpg" 
 
 const Navbar = () => {
   const user = useRecoilValue(userState);
@@ -84,7 +80,8 @@ const Navbar = () => {
   return (
     <nav className="bg-gold-100 shadow-md p-4 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo & Brand */}
+        
+        {/* Brand with Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <img
             src={logo}
@@ -101,7 +98,8 @@ const Navbar = () => {
           <NavLink to="/about">About</NavLink>
           <NavLink to="/services">Services</NavLink>
           <NavLink to="/contact">Contact</NavLink>
-          {user.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+         
+          
         </div>
 
         {/* Auth Buttons */}

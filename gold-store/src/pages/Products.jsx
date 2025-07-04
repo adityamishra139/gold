@@ -70,14 +70,14 @@ export default function Products() {
 
   return (
     <div className="px-4 md:px-10 py-10">
-      <h1 className="text-3xl font-bold text-gold-800 text-center mb-8">Our Gold Collection</h1>
+      <h1 className="text-3xl font-bold text-amber-800 text-center mb-8">Our Gold Collection</h1>
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="border border-gold-300 rounded px-4 py-2 focus:outline-none"
+          className="border border-amber-300 rounded px-4 py-2 focus:outline-none"
         >
           {categories.map((cat) => (
             <option key={cat} value={cat}>
@@ -89,7 +89,7 @@ export default function Products() {
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
-          className="border border-gold-300 rounded px-4 py-2 focus:outline-none"
+          className="border border-amber-300 rounded px-4 py-2 focus:outline-none"
         >
           <option value="default">Sort: Featured</option>
           <option value="low">Price: Low to High</option>
@@ -103,15 +103,15 @@ export default function Products() {
         {filtered.map((product) => (
           <div
             key={product.id}
-            className="border border-gold-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"
+            className="border border-amber-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"
           >
             <img
               src={product.image}
               alt={product.name}
-              className="w-full h-64 object-cover bg-gold-50"
+              className="w-full h-64 object-cover bg-amber-50"
             />
             <div className="p-4">
-              <h2 className="text-xl font-semibold text-gold-700 mb-1">{product.name}</h2>
+              <h2 className="text-xl font-semibold text-amber-700 mb-1">{product.name}</h2>
               <div className="flex items-center gap-1 text-yellow-500 mb-2">
                 {[...Array(5)].map((_, i) => (
                   <Star
@@ -123,9 +123,9 @@ export default function Products() {
                 ))}
                 <span className="text-sm text-gray-600">({product.rating})</span>
               </div>
-              <p className="text-gold-700 font-bold text-lg mb-3">${product.price}</p>
+              <p className="text-amber-700 font-bold text-lg mb-3">${product.price}</p>
               <Link to={`/products/${product.id}`}>
-                <button className="w-full bg-gold-500 hover:bg-gold-600 text-white py-2 rounded transition">
+                <button className="w-full bg-amber-600 hover:bg-amber-700 text-white py-2 rounded transition">
                   View Details
                 </button>
               </Link>
