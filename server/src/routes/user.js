@@ -27,7 +27,7 @@ router.post("/signup" , async(req,res)=>{
             res.cookie("token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production", 
-                sameSite: "Strict",
+                sameSite:"None",
                 maxAge:60 * 60 * 1000,
             });
             return res.json({success:false,"msg":"User already exists"})
@@ -65,8 +65,8 @@ router.post("/signin", async(req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "Strict",
             maxAge: 60 * 60 * 1000,
+            sameSite:"None"
         });
 
         return res.status(200).json({
@@ -102,7 +102,7 @@ router.get("/me" , authenticate , async(req,res)=>{
                 isAdmin:true
             }
         })
-        res.json({"user":user});
+        res.json({"success" : true,"user":user});
     }
     catch(e)
     {
