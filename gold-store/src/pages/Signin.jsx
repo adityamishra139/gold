@@ -3,6 +3,7 @@ import { axiosInstance } from '../../axios';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../atoms';
+import {Link} from 'react-router-dom'
 
 function SignIn() {
   const setUser = useSetRecoilState(userState);
@@ -115,9 +116,12 @@ const [showPassword, setShowPassword] = useState(false);
 
         <p className="mt-6 text-sm text-center text-[#5F4B3B]">
           Don’t have an account?{' '}
-          <a href="/signup" className="text-[#B88900] hover:underline font-medium">
+          <Link
+            to="/signup"
+            className="text-[#B88900] hover:underline font-medium"
+          >
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
