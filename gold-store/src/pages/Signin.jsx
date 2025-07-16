@@ -25,7 +25,8 @@ function SignIn() {
         console.log(res.data);
         if(res.status === 200)
         {
-          navigate("/")
+
+          // navigate("/")
         }
         else{
           console.error("Unexpected response status:", res.status);
