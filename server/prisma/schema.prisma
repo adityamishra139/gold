@@ -1,12 +1,11 @@
 enum Category {
-  RING      @map("ring")
-  NECKLACE  @map("necklace")
-  BRACELET  @map("bracelet")
-  EARRING   @map("earring")
-  PENDANT   @map("pendant")
-  CHAIN     @map("chain")
+  RING     @map("ring")
+  NECKLACE @map("necklace")
+  BRACELET @map("bracelet")
+  EARRING  @map("earring")
+  PENDANT  @map("pendant")
+  CHAIN    @map("chain")
 }
-
 
 generator client {
   provider = "prisma-client-js"
@@ -27,11 +26,18 @@ model User {
 }
 
 model GoldItem {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
   category  Category
   price     Float
   rating    Float
   image     String?
   createdAt DateTime @default(now())
+}
+
+model Query {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String
+  query String
 }
