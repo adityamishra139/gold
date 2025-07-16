@@ -4,16 +4,14 @@ import { Link } from "react-router-dom";
 import { axiosInstance } from "../../axios";
 import { useEffect } from "react";
 
-
-
 const categories = [
-  "all",
-  "rings",
-  "necklaces",
-  "bracelets",
-  "earrings",
-  "chains",
-  "pendants",
+  { value: "all", label: "All Categories" },
+  { value: "RING", label: "Rings" },
+  { value: "NECKLACE", label: "Necklaces" },
+  { value: "BRACELET", label: "Bracelets" },
+  { value: "EARRING", label: "Earrings" },
+  { value: "CHAIN", label: "Chains" },
+  { value: "PENDANT", label: "Pendants" },
 ];
 
 export default function Products() {
@@ -33,17 +31,17 @@ export default function Products() {
       }
     };
     allProducts();
-  },[]);
-  // const filtered = jewel
-  //   .filter(
-  //     (p) => selectedCategory === "all" || p.category === selectedCategory
-  //   )
-  //   .sort((a, b) => {
-  //     if (sortOrder === "low") return a.price - b.price;
-  //     if (sortOrder === "high") return b.price - a.price;
-  //     if (sortOrder === "rating") return b.rating - a.rating;
-  //     return 0;
-  //   });
+  }, []);
+  const filtered = jewel
+    .filter(
+      (p) => selectedCategory === "all" || p.category === selectedCategory
+    )
+    .sort((a, b) => {
+      if (sortOrder === "low") return a.price - b.price;
+      if (sortOrder === "high") return b.price - a.price;
+      if (sortOrder === "rating") return b.rating - a.rating;
+      return 0;
+    });
 
   return (
     <div className="px-4 md:px-10 py-10">
@@ -59,10 +57,8 @@ export default function Products() {
           className="border border-gold-300 rounded px-4 py-2 focus:outline-none"
         >
           {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat === "all"
-                ? "All Categories"
-                : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <option key={cat.value} value={cat.value}>
+              {cat.label}
             </option>
           ))}
         </select>
@@ -81,7 +77,7 @@ export default function Products() {
 
       {/* Product Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {jewel.map((product) => (
+        {filtered.map((product) => (
           <div
             key={product.id}
             className="border border-gold-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"

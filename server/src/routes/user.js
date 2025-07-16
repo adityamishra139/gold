@@ -5,6 +5,7 @@ import { verifyUser } from "../helper/verifyUser.js";
 import { generateToken } from "../helper/jwt.js";
 import { authenticate } from "../middlewares/authenticate.js";
 import { prisma } from "../helper/pooler.js";
+import insertQuery from "../helper/insertQuery.js";
 // import insertQuery from "../helper/insertQuery.js";
 const router = Router();
 
@@ -127,11 +128,11 @@ router.get('/jewel', async (req, res) => {
   }
 });
 
-//make query
+// make query
 // router.post('/query',authenticate,async(req,res)=>{
 //     try{
 //         const {name,email,query}=req.body;
-//         const createQuery=
+//         const createQuery=await insertQuery(name,email,)
 //     }
 // })
 
