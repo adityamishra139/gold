@@ -87,7 +87,7 @@ export default function Products() {
             className="border border-gold-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"
           >
             <img
-              src={`https://gold-1yxg.onrender.com/uploads/${product.image}`}
+              src={`http://localhost:3000/uploads/${product.image}`}
               alt={product.name}
               className="w-full h-64 object-cover bg-gold-50"
             />

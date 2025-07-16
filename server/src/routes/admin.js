@@ -18,33 +18,42 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post(
-  "/newItem",
-  upload.single("image"),
-  async (req, res) => {
-    try {
-      const { name, category, price, rating } = req.body;
+router.post("/newItem", upload.single("image"), async (req, res) => {
+  try {
+    const { name, category, price, rating } = req.body;
 
-      if (!name || !category || !price || !rating) {
-        return res.status(400).json({ success: false, msg: "Missing fields" });
-      }
-
-      const newItem = await prisma.goldItem.create({
-        data: {
-          name,
-          category,
-          price: parseFloat(price),
-          rating: parseFloat(rating),
-          image: req.file ? req.file.filename : null, // Store image filename or null
-        },
-      });
-
-      res.status(201).json({ success: true, item: newItem });
-    } catch (e) {
-      console.error("Error creating item:", e);
-      res.status(500).json({ success: false, msg: "Server error" });
+    if (!name || !category || !price || !rating) {
+      return res.status(400).json({ success: false, msg: "Missing fields" });
     }
+
+    const validCategories = [
+      "ring",
+      "necklace",
+      "bracelet",
+      "earring",
+      "pendant",
+      "chain",
+    ];
+    if (!validCategories.includes(category)) {
+      return res.status(400).json({ success: false, msg: "Invalid category" });
+    }
+    const prismaCategory = category.toUpperCase();
+
+    const newItem = await prisma.goldItem.create({
+      data: {
+        name,
+        category: prismaCategory, // Send UPPERCASE enum key
+        price: parseFloat(price),
+        rating: parseFloat(rating),
+        image: req.file ? req.file.filename : null,
+      },
+    });
+
+    res.status(201).json({ success: true, item: newItem });
+  } catch (e) {
+    console.error("Error creating item:", e.message, e.stack);
+    res.status(500).json({ success: false, msg: "Server error" });
   }
-);
+});
 
 export default router;

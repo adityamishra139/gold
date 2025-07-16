@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { axiosInstance } from '../../axios';
 
+const CATEGORY_OPTIONS = [
+  { label: "Ring", value: "ring" },
+  { label: "Necklace", value: "necklace" },
+  { label: "Bracelet", value: "bracelet" },
+  { label: "Earring", value: "earring" },
+  { label: "Pendant", value: "pendant" },
+  { label: "Chain", value: "chain" },
+];
+
 export default function Admin() {
   const [item, setItem] = useState({
     name: "",
-    category: "",
+    category: "ring", // default value
     price: "",
     rating: "",
   });
@@ -18,16 +27,11 @@ export default function Admin() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImageFile(file);
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    } else {
-      setPreview(null);
-    }
+    setPreview(file ? URL.createObjectURL(file) : null);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!imageFile) {
       alert("Please upload an image.");
       return;
@@ -38,10 +42,10 @@ export default function Admin() {
     formData.append("category", item.category);
     formData.append("price", item.price);
     formData.append("rating", item.rating);
-    formData.append("image", imageFile); // append image file
+    formData.append("image", imageFile);
 
     try {
-      await axiosInstance.post("/api/admin/newItem" , formData, {
+      await axiosInstance.post("/api/admin/newItem", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("Item added successfully!");
@@ -65,15 +69,22 @@ export default function Admin() {
           required
           className="w-full p-2 border rounded"
         />
-        <input
-          type="text"
+
+        {/* ✅ Category dropdown using enum values */}
+        <select
           name="category"
-          placeholder="Category"
           value={item.category}
           onChange={handleChange}
           required
           className="w-full p-2 border rounded"
-        />
+        >
+          {CATEGORY_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+
         <input
           type="number"
           name="price"
