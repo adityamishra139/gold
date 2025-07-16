@@ -1,8 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Star } from "lucide-react";
-import { Link } from "react-router-dom";
 import { axiosInstance } from "../../axios";
-import { useEffect } from "react";
 
 const categories = [
   { value: "all", label: "All Categories" },
@@ -32,6 +30,7 @@ export default function Products() {
     };
     allProducts();
   }, []);
+
   const filtered = jewel
     .filter(
       (p) => selectedCategory === "all" || p.category === selectedCategory
@@ -44,17 +43,17 @@ export default function Products() {
     });
 
   return (
-    <div className="px-4 md:px-10 py-10">
-      <h1 className="text-3xl font-bold text-gold-800 text-center mb-8">
-        Our Gold Collection
+    <div className="px-4 md:px-10 py-10 bg-[#faf9f6] min-h-screen">
+      <h1 className="text-4xl font-bold text-center text-[#1a1a1a] mb-10">
+        Our <span className="text-yellow-600">Gold Collection</span>
       </h1>
 
       {/* Filters */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-10">
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="border border-gold-300 rounded px-4 py-2 focus:outline-none"
+          className="w-full md:w-auto border border-gray-300 rounded px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
         >
           {categories.map((cat) => (
             <option key={cat.value} value={cat.value}>
@@ -66,7 +65,7 @@ export default function Products() {
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
-          className="border border-gold-300 rounded px-4 py-2 focus:outline-none"
+          className="w-full md:w-auto border border-gray-300 rounded px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
         >
           <option value="default">Sort: Featured</option>
           <option value="low">Price: Low to High</option>
@@ -76,22 +75,22 @@ export default function Products() {
       </div>
 
       {/* Product Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filtered.map((product) => (
           <div
             key={product.id}
-            className="border border-gold-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"
+            className="rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 bg-white"
           >
             <img
               src={`http://localhost:3000/uploads/${product.image}`}
               alt={product.name}
-              className="w-full h-64 object-cover bg-gold-50"
+              className="w-full h-64 object-cover"
             />
-            <div className="p-4">
-              <h2 className="text-xl font-semibold text-gold-700 mb-1">
+            <div className="p-5">
+              <h2 className="text-lg font-semibold text-gray-800 mb-2">
                 {product.name}
               </h2>
-              <div className="flex items-center gap-1 text-yellow-500 mb-2">
+              <div className="flex items-center gap-1 text-yellow-500 mb-3">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
@@ -102,18 +101,13 @@ export default function Products() {
                     }`}
                   />
                 ))}
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-gray-600 ml-1">
                   ({product.rating})
                 </span>
               </div>
-              <p className="text-gold-700 font-bold text-lg mb-3">
+              <p className="text-xl font-bold text-gray-900">
                 ${product.price}
               </p>
-              <Link to={`/products/${product.id}`}>
-                <button className="w-full bg-gold-500 hover:bg-gold-600 text-white py-2 rounded transition">
-                  View Details
-                </button>
-              </Link>
             </div>
           </div>
         ))}
