@@ -10,13 +10,15 @@ import SignIn from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile"
 import Admin from "./pages/Admin";
+import Maintenance from "./pages/Maintenance";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Maintenance />} />
+        {/* <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
@@ -24,9 +26,9 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<Admin />} /> */}
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
