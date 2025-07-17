@@ -8,8 +8,21 @@ import { axiosInstance } from "../../axios";
 const Navbar = () => {
   const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
+  const isLoggedIn = !!user?.id;
 
-  const isLoggedIn = !!user.id;
+  const handleLogout = async (silent = false) => {
+    try {
+      await axiosInstance.get("/api/user/logout");
+      if (!silent) alert("Logged out successfully!");
+    } catch (err) {
+      console.error("Logout failed:", err);
+      if (!silent) alert("Logout error");
+    } finally {
+      setUser({ id: null, fname: "", lname: "", email: "", isAdmin: false });
+      localStorage.removeItem("recoil-persist");
+      navigate("/");
+    }
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -30,21 +43,8 @@ const Navbar = () => {
     if (!user?.id) {
       fetchUser();
     }
-  }, [user?.id, setUser]); // depends on user.id to avoid rechecking when already logged in
+  }, [user?.id]); // setUser is stable from Recoil, no need to include in deps
 
-  const handleLogout = async (silent = false) => {
-    try {
-      await axiosInstance.get("/api/user/logout");
-      if (!silent) alert("Logged out successfully!");
-    } catch (err) {
-      console.error("Logout failed:", err);
-      if (!silent) alert("Logout error");
-    } finally {
-      setUser({ id: null, fname: "", lname: "", email: "", isAdmin: false });
-      localStorage.removeItem("recoil-persist");
-      navigate("/");
-    }
-  };
 
   return (
     <nav className="bg-white border-b shadow-sm sticky top-0 z-50">
@@ -69,7 +69,7 @@ const Navbar = () => {
 
         {/* Auth buttons */}
         <div className="relative">
-          {user.fname !== "" ? (
+          {isLoggedIn ? (
             <div className="group relative inline-block">
               <button className="text-gray-700 font-medium hover:text-yellow-600 transition">
                 Hi, {user.fname}
@@ -98,3 +98,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

@@ -7,6 +7,7 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import FadeInWhenVisible from "../components/FadeInWhenVisible";
+import mostSelling from "../assets/mostSelling.webp"
 
 export default function Home() {
   const categories = [
@@ -132,7 +133,7 @@ export default function Home() {
                 className="bg-white rounded-xl shadow-md border border-amber-100 p-4"
               >
                 <img
-                  src="/images/gold-jewelry-placeholder.png"
+                  src={mostSelling}
                   alt="Gold Jewelry"
                   className="w-full h-60 object-cover rounded"
                 />

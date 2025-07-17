@@ -1,3 +1,4 @@
+import pp from "../assets/rksharma.png"
 export default function About() {
   return (
     <div className="bg-gradient-to-b from-white to-amber-50 min-h-screen px-6 md:px-20 py-12 text-amber-900">
@@ -55,7 +56,7 @@ export default function About() {
           ].map((member, idx) => (
             <div key={idx} className="bg-white p-6 rounded-xl border border-amber-100 shadow">
               <img
-                src={member.img}
+                src={pp}
                 alt={member.name}
                 className="w-24 h-24 mx-auto rounded-full object-cover mb-4"
               />

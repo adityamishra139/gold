@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post("/newItem", upload.single("image"), async (req, res) => {
+router.post("/newItem",authenticate, upload.single("image"), async (req, res) => {
   try {
     const { name, category, price, rating } = req.body;
 
@@ -55,5 +55,32 @@ router.post("/newItem", upload.single("image"), async (req, res) => {
     res.status(500).json({ success: false, msg: "Server error" });
   }
 });
+
+// Get all queries
+router.get("/queries", authenticate, async (req, res) => {
+  try {
+    const queries = await prisma.query.findMany();
+    res.json({ success: true, queries });
+  } catch (err) {
+    console.error("Error fetching queries:", err);
+    res.status(500).json({ success: false, msg: "Server error" });
+  }
+});
+
+// Delete query by ID
+router.delete("/deleteQueries/:id", authenticate, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deleted = await prisma.query.delete({
+      where: { id: parseInt(id) },
+    });
+    res.json({ success: true, deleted });
+  } catch (err) {
+    console.error("Error deleting query:", err);
+    res.status(500).json({ success: false, msg: "Server error or invalid ID" });
+  }
+});
+
 
 export default router;

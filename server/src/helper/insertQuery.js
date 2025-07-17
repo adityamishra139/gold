@@ -1,3 +1,4 @@
+import { prisma } from './pooler.js';
 export default async function insertQuery(name, email, query) {
   if (!name || !email || !query) {
     console.error('Missing required fields');
