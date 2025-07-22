@@ -120,7 +120,7 @@ function ProductModal({ product, isOpen, onClose }) {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              {/* <div className="grid grid-cols-2 gap-6">
                 <div>
                   <h4 className="text-sm font-medium text-stone-900 mb-2">Specifications</h4>
                   <div className="space-y-1 text-sm text-stone-600">
@@ -151,7 +151,7 @@ function ProductModal({ product, isOpen, onClose }) {
                     <li>• Professional cleaning recommended</li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
 
               {/* Action Buttons */}
               <div className="flex gap-4 pt-6 border-t border-stone-200">
