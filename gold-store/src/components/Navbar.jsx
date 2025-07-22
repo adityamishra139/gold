@@ -1,5 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import logo from "../assets/logo.jpg";
 import { useRecoilState } from "recoil";
 import { userState } from "../../atoms";
@@ -7,6 +8,7 @@ import { axiosInstance } from "../../axios";
 
 const Navbar = () => {
   const [user, setUser] = useRecoilState(userState);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const isLoggedIn = !!user?.id;
 
@@ -34,8 +36,7 @@ const Navbar = () => {
         } else {
           throw new Error("Invalid session");
         }
-      } catch (err) {
-        console.warn("Session invalid. Logging out.");
+      } catch {
         handleLogout(true); // silent logout
       }
     };
@@ -43,41 +44,98 @@ const Navbar = () => {
     if (!user?.id) {
       fetchUser();
     }
-  }, [user?.id]); // setUser is stable from Recoil, no need to include in deps
+  }, [user?.id]);
 
+  const navItems = [
+    { path: "/", label: "Home" },
+    { path: "/products", label: "Products" },
+    { path: "/about", label: "About" },
+    { path: "/services", label: "Services" },
+    { path: "/contact", label: "Contact" },
+  ];
+
+  if (user?.isAdmin) navItems.push({ path: "/admin", label: "Admin" });
 
   return (
-    <nav className="bg-white border-b shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200 font-serif">
+      <style jsx="true">{`
+        .elegant-underline {
+          position: relative;
+        }
+        .elegant-underline::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 50%;
+          width: 0;
+          height: 1px;
+          background: #8B6B5D;
+          transition: all 0.3s ease;
+          transform: translateX(-50%);
+        }
+        .elegant-underline:hover::after {
+          width: 100%;
+        }
+        .refined-button {
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+        .refined-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          transition: left 0.5s ease;
+        }
+        .refined-button:hover::before {
+          left: 100%;
+        }
+      `}</style>
+
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Swarnaavya Logo" className="w-10 h-10 rounded-full object-cover" />
-          <span className="text-2xl font-bold text-yellow-700">Swarnaavya</span>
+        <Link to="/" className="flex items-center gap-2 group">
+          <img src={logo} alt="Logo" className="w-10 h-10 rounded-full object-cover" />
+          <span className="text-xl font-bold text-stone-900 tracking-tight group-hover:text-stone-800 transition">
+            Swarnaavya
+          </span>
         </Link>
 
-        {/* Links */}
-        <div className="hidden md:flex gap-6 text-gray-700 font-medium">
-          <NavLink to="/" end className={({ isActive }) => isActive ? "text-yellow-600 border-b-2 border-yellow-600 pb-1" : "hover:text-yellow-700 transition"}>Home</NavLink>
-          <NavLink to="/products" className={({ isActive }) => isActive ? "text-yellow-600 border-b-2 border-yellow-600 pb-1" : "hover:text-yellow-700 transition"}>Products</NavLink>
-          <NavLink to="/about" className={({ isActive }) => isActive ? "text-yellow-600 border-b-2 border-yellow-600 pb-1" : "hover:text-yellow-700 transition"}>About</NavLink>
-          <NavLink to="/services" className={({ isActive }) => isActive ? "text-yellow-600 border-b-2 border-yellow-600 pb-1" : "hover:text-yellow-700 transition"}>Services</NavLink>
-          <NavLink to="/contact" className={({ isActive }) => isActive ? "text-yellow-600 border-b-2 border-yellow-600 pb-1" : "hover:text-yellow-700 transition"}>Contact</NavLink>
-          {user?.isAdmin && (
-            <NavLink to="/admin" className={({ isActive }) => isActive ? "text-yellow-600 border-b-2 border-yellow-600 pb-1" : "hover:text-yellow-700 transition"}>Admin</NavLink>
-          )}
+        {/* Desktop nav */}
+        <div className="hidden md:flex gap-8 text-[15px] text-stone-700 font-medium">
+          {navItems.map(({ path, label }) => (
+            <NavLink
+              key={path}
+              to={path}
+              className={({ isActive }) =>
+                `elegant-underline ${
+                  isActive
+                    ? "text-stone-900 font-semibold"
+                    : "hover:text-stone-900 transition-colors"
+                }`
+              }
+              end={path === "/"}
+            >
+              {label}
+            </NavLink>
+          ))}
         </div>
 
-        {/* Auth buttons */}
-        <div className="relative">
+        {/* Auth area */}
+        <div className="hidden md:block">
           {isLoggedIn ? (
-            <div className="group relative inline-block">
-              <button className="text-gray-700 font-medium hover:text-yellow-600 transition">
+            <div className="relative group">
+              <button className="text-sm text-stone-700 hover:text-stone-900 transition">
                 Hi, {user.fname}
               </button>
-              <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
+              <div className="absolute right-0 mt-2 w-40 bg-white border border-neutral-200 rounded shadow-sm opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200 z-50">
                 <button
                   onClick={() => handleLogout(false)}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                  className="block w-full px-4 py-2 text-left text-sm hover:bg-neutral-100 text-red-600"
                 >
                   Logout
                 </button>
@@ -86,16 +144,72 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => navigate("/signin")}
-              className="bg-yellow-500 text-white px-4 py-1.5 rounded hover:bg-yellow-600 transition"
+              className="bg-stone-900 text-white text-sm px-4 py-2 rounded-sm hover:bg-stone-800 refined-button"
             >
               Login
             </button>
           )}
         </div>
+
+        {/* Mobile toggle */}
+        <div className="md:hidden">
+          <button onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile nav */}
+      {menuOpen && (
+        <div className="md:hidden border-t border-neutral-200 px-6 py-4 bg-white shadow-sm font-serif">
+          <div className="flex flex-col gap-4 text-sm text-stone-700">
+            {navItems.map(({ path, label }) => (
+              <NavLink
+                key={path}
+                to={path}
+                onClick={() => setMenuOpen(false)}
+                className={({ isActive }) =>
+                  `elegant-underline ${
+                    isActive
+                      ? "text-stone-900 font-semibold"
+                      : "hover:text-stone-900 transition-colors"
+                  }`
+                }
+                end={path === "/"}
+              >
+                {label}
+              </NavLink>
+            ))}
+
+            {isLoggedIn ? (
+              <>
+                <span className="text-xs text-neutral-500">Hi, {user.fname}</span>
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    handleLogout(false);
+                  }}
+                  className="text-left text-red-600 text-sm hover:underline"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  navigate("/signin");
+                }}
+                className="bg-stone-900 text-white px-4 py-2 rounded-sm text-sm hover:bg-stone-800 refined-button"
+              >
+                Login
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
 
 export default Navbar;
-
