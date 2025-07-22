@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import {
   FaGem, FaRing, FaStar, FaHeart, FaShieldAlt, FaTruck
 } from "react-icons/fa";
+import heroImage from "../assets/Collection1.png"
+import fadeImg from "../assets/logo2.png"
 
 // Gentle scroll animation hook
 function useScrollAnimation() {
@@ -199,6 +201,11 @@ export default function Home() {
         ref={heroRef}
         className="min-h-screen flex flex-col md:flex-row items-center bg-gradient-to-br from-stone-50 to-amber-50/30 px-8 pt-0 pb-8 relative"
       >
+        <img 
+    src={fadeImg} 
+    alt="Background" 
+    className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none z-0"
+  />
         <div 
           className={`flex-1 max-w-2xl fade-in-up ${heroVisible ? 'visible' : ''}`}
           style={{ 
@@ -223,7 +230,7 @@ export default function Home() {
               Explore Collection
             </Link>
             <Link 
-              to="/appointment" 
+              to="/contact" 
               className="border border-stone-300 text-stone-700 font-medium px-8 py-3 rounded-sm hover:bg-stone-50 transition-all duration-300"
             >
               Book Appointment
@@ -249,11 +256,15 @@ export default function Home() {
         
         {/* Hero Image - Subtle Animation */}
         <div className="flex-1 flex justify-center mt-12 md:mt-0">
-          <div className="w-80 h-80 bg-gradient-to-br from-stone-100 to-stone-200 rounded-lg border border-stone-200 flex flex-col items-center justify-center shadow-lg subtle-animation">
-            <FaGem className="text-6xl text-stone-400 mb-4" />
-            <div className="text-stone-600 font-light text-lg">Heritage Collection</div>
-          </div>
-        </div>
+  <div className="w-80 h-80 rounded-lg border border-stone-200 shadow-lg overflow-hidden z-100">
+    <img 
+      src={heroImage} 
+      alt="Heritage Collection" 
+      className="w-full h-full object-cover"
+    />
+  </div>
+</div>
+
         
         {/* Refined Rating Card */}
         <div 
@@ -263,8 +274,8 @@ export default function Home() {
           <span className="flex items-center gap-1 text-amber-500">
             {[...Array(5)].map((_, i) => <FaStar key={i} className="text-sm" />)}
           </span>
-          <span className="font-medium text-stone-900">4.9</span>
-          <span className="text-stone-500 text-sm">3,247 reviews</span>
+          <span className="font-medium text-stone-900">5.0</span>
+          <span className="text-stone-500 text-sm">16 reviews</span>
         </div>
       </section>
 
@@ -284,9 +295,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {categories.map((collection, idx) => (
               <div 
-                key={collection.name}
-                className={`bg-stone-50 rounded-lg p-8 luxury-hover fade-in-up ${collectionVisible ? 'visible' : ''}`}
-                style={{ animationDelay: `${idx * 0.2}s` }}
+              key={collection.name}
+              className={`bg-stone-50 rounded-lg p-8 luxury-hover fade-in-up ${collectionVisible ? 'visible' : ''}`}
+              style={{ animationDelay: `${idx * 0.2}s` }}
               >
                 {collection.badge && (
                   <span className="inline-block mb-4 text-xs bg-stone-200 text-stone-700 px-3 py-1 rounded-full uppercase tracking-wide">

@@ -11,20 +11,25 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const isLoggedIn = !!user?.id;
+  const [message,setMessage] = useState({})
 
   const handleLogout = async (silent = false) => {
     try {
       await axiosInstance.get("/api/user/logout");
-      if (!silent) alert("Logged out successfully!");
+      if (!silent) 
+      setMessage({"color" : "bg-green-400" , "message" : "Logged out successfully!"})
     } catch (err) {
       console.error("Logout failed:", err);
-      if (!silent) alert("Logout error");
     } finally {
       setUser({ id: null, fname: "", lname: "", email: "", isAdmin: false });
       localStorage.removeItem("recoil-persist");
       navigate("/");
     }
   };
+
+  setTimeout(()=>{
+    setMessage({})
+  },5000)
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -50,14 +55,13 @@ const Navbar = () => {
     { path: "/", label: "Home" },
     { path: "/products", label: "Products" },
     { path: "/about", label: "About" },
-    { path: "/services", label: "Services" },
     { path: "/contact", label: "Contact" },
   ];
 
   if (user?.isAdmin) navItems.push({ path: "/admin", label: "Admin" });
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200 font-serif">
+    <nav className="sticky top-0 z-101 bg-white/95 backdrop-blur-sm border-b border-neutral-200 font-serif">
       <style jsx="true">{`
         .elegant-underline {
           position: relative;
@@ -98,8 +102,8 @@ const Navbar = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <img src={logo} alt="Logo" className="w-10 h-10 rounded-full object-cover" />
+        <Link to="/" className="flex items-center gap-1 group">
+          <img src={logo} alt="Logo" className="w-12 h-12 rounded-full object-cover" />
           <span className="text-xl font-bold text-stone-900 tracking-tight group-hover:text-stone-800 transition">
             Swarnaavya
           </span>
@@ -206,6 +210,11 @@ const Navbar = () => {
               </button>
             )}
           </div>
+        </div>
+      )}
+      {message.message && (
+        <div className={`fixed top-20 left-1/2 transform -translate-x-1/2 ${message.color} text-white px-6 py-3 rounded-md shadow-md z-50 transition-all duration-300`}>
+          {message.message}
         </div>
       )}
     </nav>
