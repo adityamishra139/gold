@@ -154,12 +154,12 @@ function ProductModal({ product, isOpen, onClose }) {
               </div> */}
 
               {/* Action Buttons */}
-              <div className="flex gap-4 pt-6 border-t border-stone-200">
+              {/* <div className="flex gap-4 pt-6 border-t border-stone-200">
                 
                 <button className="w-12 h-12 border border-stone-300 hover:bg-stone-50 rounded-sm transition-colors flex items-center justify-center">
                   <Heart className="w-4 h-4 text-stone-600" />
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

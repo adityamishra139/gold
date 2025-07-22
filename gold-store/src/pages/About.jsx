@@ -293,6 +293,16 @@ export default function About() {
         </div>
       </section> */}
 
+      {/* Founder's Message */}
+      <section className="py-20 px-8 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-light text-stone-900 mb-6">Founder's Message</h2>
+          <p className="text-lg text-stone-600 leading-relaxed ">
+            What started as a humble dream in 1975 has now become a name generations trust. At Swarnaavya, we don't just sell jewellery—we help you celebrate life's moments
+          </p>
+          </div>
+      </section>
+
       {/* Heritage Section */}
       <section className="py-20 px-8 bg-white">
         <div className="max-w-4xl mx-auto text-center">
