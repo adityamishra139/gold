@@ -5,6 +5,8 @@ enum Category {
   EARRING  @map("earring")
   PENDANT  @map("pendant")
   CHAIN    @map("chain")
+  PAYAL    @map("payal")
+  BANGLE   @map("bangle")
 }
 
 generator client {
@@ -33,6 +35,7 @@ model GoldItem {
   rating    Float
   image     String?
   createdAt DateTime @default(now())
+  description String
 }
 
 model Query {

@@ -10,6 +10,9 @@ const categories = [
   { value: "EARRING", label: "Earrings" },
   { value: "CHAIN", label: "Chains" },
   { value: "PENDANT", label: "Pendants" },
+  { value: "BANGLE", label: "Bangles" },
+  { value: "PAYAL", label: "Payals" },
+
 ];
 
 // Gentle scroll animation hook

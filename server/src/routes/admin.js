@@ -20,9 +20,9 @@ const upload = multer({ storage: storage });
 
 router.post("/newItem",authenticate, upload.single("image"), async (req, res) => {
   try {
-    const { name, category, price, rating } = req.body;
+    const { name, category, price, rating , description } = req.body;
 
-    if (!name || !category || !price || !rating) {
+    if (!name || !category || !price || !rating || !description) {
       return res.status(400).json({ success: false, msg: "Missing fields" });
     }
 
@@ -33,6 +33,8 @@ router.post("/newItem",authenticate, upload.single("image"), async (req, res) =>
       "earring",
       "pendant",
       "chain",
+      "payal",
+      "bangle",
     ];
     if (!validCategories.includes(category)) {
       return res.status(400).json({ success: false, msg: "Invalid category" });
@@ -46,6 +48,7 @@ router.post("/newItem",authenticate, upload.single("image"), async (req, res) =>
         price: parseFloat(price),
         rating: parseFloat(rating),
         image: req.file ? req.file.filename : null,
+        description
       },
     });
 
@@ -82,5 +85,25 @@ router.delete("/deleteQueries/:id", authenticate, async (req, res) => {
   }
 });
 
+router.delete("/deleteItem",authenticate, async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    if (!id) {
+      return res.status(400).json({ success: false, msg: "Missing field ID" });
+    }
+
+    const deletedItem = await prisma.goldItem.deleteMany({
+      where: {
+        id
+      },
+    });
+
+    res.status(201).json({ success: true, item: deletedItem });
+  } catch (e) {
+    console.error("Error creating item:", e.message, e.stack);
+    res.status(500).json({ success: false, msg: "Server error" });
+  }
+});
 
 export default router;
