@@ -204,7 +204,7 @@ export default function Home() {
         <img 
     src={fadeImg} 
     alt="Background" 
-    className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none z-0"
+    className="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none select-none z-0"
   />
         <div 
           className={`flex-1 max-w-2xl fade-in-up ${heroVisible ? 'visible' : ''}`}
@@ -224,7 +224,7 @@ export default function Home() {
           
           <div className="flex gap-4 flex-wrap mb-12">
             <Link 
-              to="/collection" 
+              to="/products" 
               className="bg-stone-900 hover:bg-stone-800 text-white font-medium px-8 py-3 rounded-sm transition-all duration-300 refined-button"
             >
               Explore Collection
