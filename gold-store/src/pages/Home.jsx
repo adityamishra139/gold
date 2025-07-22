@@ -307,7 +307,7 @@ export default function Home() {
                 
                 <h3 className="font-light text-xl text-stone-900 mb-3">{collection.name}</h3>
                 <p className="text-stone-600 leading-relaxed mb-4">{collection.desc}</p>
-                <div className="font-medium text-stone-800 mb-4">{collection.price}</div>
+                {/* <div className="font-medium text-stone-800 mb-4">{collection.price}</div> */}
                 <Link 
                   to={`/collections/${collection.name.toLowerCase().replace(/ /g, '-')}`}
                   className="text-stone-700 font-medium hover:text-stone-900 transition-colors elegant-underline inline-flex items-center gap-2"

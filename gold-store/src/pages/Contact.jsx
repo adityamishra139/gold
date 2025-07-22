@@ -129,7 +129,7 @@ export default function Contact() {
     {
       icon: Phone,
       title: "Phone",
-      value: "+91 98765 43210",
+      value: "+91 8922029059",
       description: "Speak with our team"
     },
     {

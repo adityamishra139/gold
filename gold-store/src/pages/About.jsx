@@ -169,10 +169,13 @@ export default function About() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-lg text-stone-600 leading-relaxed">
-                  Established in 1995, <span className="font-medium text-stone-800">Swarnaavya Jewels</span> has been a trusted name in fine jewelry for over two decades. With a legacy rooted in craftsmanship and integrity, we specialize in pure gold ornaments that define luxury, tradition, and timelessness.
+                  Established in 1975, <span className="font-medium text-stone-800">Swarnaavya Jewels</span> we carry forward the legacy of <span className="font-medium text-stone-800">Annapurna Jewellers Pvt. Ltd.</span>, trusted since 1975 for quality, purity, and craftsmanship.
+
                 </p>
                 <p className="text-lg text-stone-600 leading-relaxed">
-                  What began as a humble family-owned shop has now grown into a recognized destination for quality and trust. Our customers return not just for the purity of our gold, but for the warmth of our service and the stories each piece tells.
+                  Blending traditional artistry with modern elegance, we create timeless jewellery in silver, gold, and diamonds—each piece reflecting heritage, sophistication, and authenticity.
+
+                  More than accessories, our jewellery is a celebration of identity and grace. Step into the world of Swarnaavya, where every design tells a story.
                 </p>
               </div>
               <div className="w-full h-80 bg-gradient-to-br from-stone-100 to-stone-200 rounded-lg border border-stone-200 flex items-center justify-center subtle-animation">
@@ -201,7 +204,7 @@ export default function About() {
                 </div>
                 <h3 className="text-2xl font-light text-stone-900 mb-4">Our Mission</h3>
                 <p className="text-stone-600 leading-relaxed">
-                  To deliver exceptional gold products that celebrate heritage, beauty, and trust — empowering every customer to feel valued and cherished through pieces that last generations.
+                   To create timeless jewellery that celebrates life’s most meaningful moments.
                 </p>
               </div>
             </div>
@@ -213,7 +216,7 @@ export default function About() {
                 </div>
                 <h3 className="text-2xl font-light text-stone-900 mb-4">Our Vision</h3>
                 <p className="text-stone-600 leading-relaxed">
-                  To become the most loved and transparent jewelry brand by setting standards in purity, craftsmanship, and personalized service that honors tradition while embracing innovation.
+                  To be Varanasi's most trusted jewellery house, blending heritage with innovation
                 </p>
               </div>
             </div>
@@ -254,7 +257,7 @@ export default function About() {
       </section>
 
       {/* Meet the Team */}
-      <section 
+      {/* <section 
         ref={teamRef}
         className="py-20 bg-stone-50"
       >
@@ -288,7 +291,7 @@ export default function About() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Heritage Section */}
       <section className="py-20 px-8 bg-white">
