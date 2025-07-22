@@ -73,7 +73,7 @@ function ProductModal({ product, isOpen, onClose }) {
           {/* Image Section */}
           <div className="relative h-80 bg-stone-50">
             <img
-              src={`http://localhost:3000/uploads/${product.image}`}
+              src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${product.image}`}
               alt={product.name}
               className="w-full h-full object-cover rounded-t-2xl"
             />
