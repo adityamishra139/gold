@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import About from "./pages/About";
@@ -10,8 +10,28 @@ import SignIn from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile"
 import Admin from "./pages/Admin";
+import { useState,useEffect } from "react";
 
 function App() {
+  const [isAdmin,setIsAdmin] = useState(false)
+  useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const res = await axiosInstance.get("/api/user/me");
+          if (res.data.success) {
+            const { id, email, firstName, lastName, isAdmin } = res.data.user;
+            setIsAdmin(isAdmin)
+          } else {
+            throw new Error("Invalid session");
+          }
+        } catch(e) {
+          console.error(e);
+        }
+      };
+  
+      fetchUser();
+    }, [],);
+
   return (
     <div className="App">
       <Navbar />
@@ -24,7 +44,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={isAdmin?<Admin />:<Navigate to="/"/>} />
       </Routes>
       <Footer />
     </div>
