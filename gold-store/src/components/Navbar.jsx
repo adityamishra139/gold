@@ -9,6 +9,7 @@ import { axiosInstance } from "../../axios";
 const Navbar = () => {
   const [user, setUser] = useRecoilState(userState);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAdmin,setIsAdmin] = useState(false)
   const navigate = useNavigate();
   const isLoggedIn = !!user?.id;
   const [message,setMessage] = useState({})
@@ -37,6 +38,7 @@ const Navbar = () => {
         const res = await axiosInstance.get("/api/user/me");
         if (res.data.success) {
           const { id, email, firstName, lastName, isAdmin } = res.data.user;
+          setIsAdmin(isAdmin)
           setUser({ id, email, fname: firstName, lname: lastName, isAdmin });
         } else {
           throw new Error("Invalid session");
@@ -49,7 +51,7 @@ const Navbar = () => {
     if (!user?.id) {
       fetchUser();
     }
-  }, [user?.id]);
+  }, [user?.id],);
 
   const navItems = [
     { path: "/", label: "Home" },
@@ -58,7 +60,7 @@ const Navbar = () => {
     { path: "/contact", label: "Contact" },
   ];
 
-  if (user?.isAdmin) navItems.push({ path: "/admin", label: "Admin" });
+  if (isAdmin) navItems.push({ path: "/admin", label: "Admin" });
 
   return (
     <nav className="sticky top-0 z-101 bg-white/95 backdrop-blur-sm border-b border-neutral-200 font-serif">
@@ -135,7 +137,7 @@ const Navbar = () => {
             <div className="relative group">
               <button className="text-sm text-stone-700 hover:text-stone-900 transition">
                 Hi, {user.fname}
-              </button>
+              </button> 
               <div className="absolute right-0 mt-2 w-40 bg-white border border-neutral-200 rounded shadow-sm opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200 z-50">
                 <button
                   onClick={() => handleLogout(false)}
